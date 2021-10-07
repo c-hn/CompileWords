@@ -2,5 +2,5 @@
 image = { source = "dockerfile", path = "."}
 
 run = [
-  "java Lexer $input",
+  "java Main $input",
 ]
