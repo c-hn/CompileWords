@@ -42,6 +42,8 @@ public class Main {
                         if(Character.isDigit(s.charAt(j)))
                             numOrIde.append(s.charAt(j));
                         else if(Character.isLowerCase(s.charAt(j)) || Character.isUpperCase(s.charAt(j)) || s.charAt(j)=='_'){
+                            if(ident)
+                                numOrIde.append(s.charAt(j));
                             if(number){
                                 System.out.println("Number("+numOrIde+")");
                                 numOrIde=new StringBuilder();
@@ -49,8 +51,6 @@ public class Main {
                                 number=false;
                                 ident=true;
                             }
-                            if(ident)
-                                numOrIde.append(s.charAt(j));
                         }
                     }
                 }else {
@@ -68,18 +68,19 @@ public class Main {
                     numOrIde=new StringBuilder();
                     number=false;
                     ident=false;
-                }
-                if(j<s.length()-1&&s.charAt(j)=='='&&s.charAt(j+1)=='='){
-                    System.out.println("Eq");
-                    if(j==s.length()-2){
-                        break;
+                    if(j<s.length()-1&&s.charAt(j)=='='&&s.charAt(j+1)=='='){
+                        System.out.println("Eq");
+                        if(j==s.length()-2){
+                            break;
+                        }
+                        j++;
+                    }else if(!(Character.isLetterOrDigit(s.charAt(j))||s.charAt(j)=='_')){
+                        String s1=String.valueOf(s.charAt(j));
+                        int index1=beforelist.indexOf(s1);
+                        System.out.println(after[index1]);
                     }
-                    j++;
-                }else if(!(Character.isLetterOrDigit(s.charAt(j))||s.charAt(j)=='_')){
-                    String s1=String.valueOf(s.charAt(j));
-                    int index1=beforelist.indexOf(s1);
-                    System.out.println(after[index1]);
                 }
+
             }
             if(numOrIde.length()!=0){
                 if(number)
