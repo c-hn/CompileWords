@@ -85,8 +85,13 @@ public class Main {
             if(numOrIde.length()!=0){
                 if(number)
                     System.out.println("Number("+numOrIde+")");
-                if(ident)
-                    System.out.println("Ident("+numOrIde+")");
+                if(ident){
+                    int index2=beforelist.indexOf(numOrIde.toString());
+                    if(index2!=-1)
+                        System.out.println(after[index2]);
+                    else
+                        System.out.println("Ident("+numOrIde+")");
+                }
             }
         }
     }
