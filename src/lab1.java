@@ -91,7 +91,7 @@ public class lab1 {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("D:\\test.txt");
+        File file = new File(args[0]);
         FileReader reader = new FileReader(file);
         BufferedReader bReader = new BufferedReader(reader);
         String s;
