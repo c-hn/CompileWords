@@ -55,6 +55,10 @@ public class lab1 {
             error=true;
             return;
         }
+        if(a.get(4).charAt(a.get(4).length()-1)!=';'){
+            error=true;
+            return;
+        }
         if(a.get(4).charAt(0)=='0'){
             if(a.get(4).charAt(1)=='x'||a.get(4).charAt(1)=='X'){
                 for(i=2;i<a.get(4).length()-1;i++){
