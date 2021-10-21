@@ -106,11 +106,15 @@ public class lab1 {
         }
         judge(addSpace(s1.toString()));
         if(error)
-            System.exit(2);
+            System.exit(1);
         else {
-            System.out.println("define dso_local i32 @main(){\n" +
+
+            FileWriter fw = new FileWriter(args[1], true);
+            PrintWriter pw = new PrintWriter(fw);
+            pw.print("define dso_local i32 @main(){\n" +
                     "    ret i32 " + number +
                     "\n}");
+            pw.flush();
         }
     }
 }
