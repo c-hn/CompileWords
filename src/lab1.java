@@ -106,7 +106,7 @@ public class lab1 {
         }
         judge(addSpace(s1.toString()));
         if(error)
-            System.exit(1);
+            System.exit(2);
         else {
             System.out.println("define dso_local i32 @main(){\n" +
                     "    ret i32 " + number +
