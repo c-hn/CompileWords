@@ -187,8 +187,8 @@ public class lab1 {
             s1.append(s);
             s1.append('\n');
         }
-        //judge(addSpace(s1.toString()));
         System.out.println(s1);
+        //judge(addSpace(s1.toString()));
         if(error)
             System.exit(1);
         else {
