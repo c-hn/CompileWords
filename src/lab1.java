@@ -187,16 +187,14 @@ public class lab1 {
             s1.append(s);
             s1.append('\n');
         }
-        judge(addSpace(s1.toString()));
+        //judge(addSpace(s1.toString()));
         if(error)
             System.exit(1);
         else {
 
             FileWriter fw = new FileWriter(args[1], true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.print("define dso_local i32 @main(){\n" +
-                    "    ret i32 " + number +
-                    "\n}");
+            pw.print(s1);
             pw.flush();
         }
     }
