@@ -29,7 +29,7 @@ public class lab1 {
                     i--;
                 sb.insert(i+1,' ');
             }
-            if(sb.charAt(i)=='\n'){
+            if(i>=0&&sb.charAt(i)=='\n'){
                 sb.insert(i+1,' ');
                 sb.insert(i,' ');
             }
@@ -151,7 +151,7 @@ public class lab1 {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File(args[0]);
+        File file = new File("D:\\test.txt");
         FileReader reader = new FileReader(file);
         BufferedReader bReader = new BufferedReader(reader);
         String s;
@@ -165,7 +165,7 @@ public class lab1 {
             System.exit(1);
         else {
 
-            FileWriter fw = new FileWriter(args[1], true);
+            FileWriter fw = new FileWriter("out.txt", true);
             PrintWriter pw = new PrintWriter(fw);
             pw.print("define dso_local i32 @main(){\n" +
                     "    ret i32 " + number +
