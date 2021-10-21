@@ -24,8 +24,11 @@ public class lab1 {
                 sb.insert(i+1,' ');
             if(sb.charAt(i)=='*'&&sb.charAt(i-1)=='/')
                 sb.insert(i-1,' ');
-            if(sb.charAt(i)=='/'&&sb.charAt(i-1)=='/')
-                sb.insert(i-1,' ');
+            if(sb.charAt(i)=='/'&&sb.charAt(i-1)=='/'){
+                while(i>=0&&sb.charAt(i)=='/')
+                    i--;
+                sb.insert(i+1,' ');
+            }
             if(sb.charAt(i)=='\n'){
                 sb.insert(i+1,' ');
                 sb.insert(i,' ');
@@ -64,7 +67,6 @@ public class lab1 {
             if(Character.isDigit(str.charAt(0))){
                 numberChange(str);
                 words.add(String.valueOf(number));
-                number=0;
             }
             else if(attachWordsList.contains(str)||notAttachWodsList.contains(str)) //注意之后如果是定义一个变量这里也会错
                 words.add(str);
@@ -117,16 +119,18 @@ public class lab1 {
         for(i=0;i<b.length;i++){
             if(b[i].contains("//")){
                 while(true){
-                    if(b[++i].contains("\n"))
+                    if(b[i++].contains("\n"))
                         break;
                 }
+                i--;
                 continue;
             }
             if(b[i].contains("/*")){
                 while (true){
-                    if(b[++i].contains("*/"))
+                    if(b[i++].contains("*/"))
                         break;
                 }
+                i--;
                 continue;
             }
             if(b[i].equals("\n"))
@@ -136,45 +140,14 @@ public class lab1 {
             else
                 splitWords(b[i]);
         }
+        if(words.size()!=lab1words.length)
+            System.exit(6);
         for(i=0;i<words.size();i++){
             if(i!=6){
                 if(!words.get(i).equals(lab1words[i]))
                     System.exit(5);
             }
         }
-//        if(a.get(4).charAt(0)=='0'){
-//            if(a.get(4).charAt(1)=='x'||a.get(4).charAt(1)=='X'){
-//                for(i=2;i<a.get(4).length()-1;i++){
-//                    for(j=0;j<22;j++){
-//                        if(a.get(4).charAt(i)==hexadecimal_digit[j])
-//                            break;
-//                    }
-//                    if(j==22){
-//                        error=true;
-//                        return;
-//                    }
-//                    if(j>=16)
-//                        j-=6;
-//                    number=number*16+j;
-//                }
-//            }else {
-//                for(i=1;i<a.get(4).length()-1;i++){
-//                    if(!Character.isDigit(a.get(4).charAt(i))||Integer.parseInt(String.valueOf(a.get(4).charAt(i)))>7){
-//                        error=true;
-//                        return;
-//                    }
-//                    number=number*8+Integer.parseInt(String.valueOf(a.get(4).charAt(i)));
-//                }
-//            }
-//        }else {
-//            for(i=0;i<a.get(4).length()-1;i++){
-//                if(!Character.isDigit(a.get(4).charAt(i))){
-//                    error=true;
-//                    return;
-//                }
-//                number=number*10+Integer.parseInt(String.valueOf(a.get(4).charAt(i)));
-//            }
-//        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -187,15 +160,16 @@ public class lab1 {
             s1.append(s);
             s1.append('\n');
         }
-        System.out.println(s1);
-        //judge(addSpace(s1.toString()));
+        judge(addSpace(s1.toString()));
         if(error)
             System.exit(1);
         else {
 
             FileWriter fw = new FileWriter(args[1], true);
             PrintWriter pw = new PrintWriter(fw);
-            pw.print(s1);
+            pw.print("define dso_local i32 @main(){\n" +
+                    "    ret i32 " + number +
+                    "\n}");
             pw.flush();
         }
     }
